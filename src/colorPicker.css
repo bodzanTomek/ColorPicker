@@ -1,0 +1,65 @@
+.colorPalette {
+    background: white;
+    float: left;
+}
+
+.sideContainer {
+    float: left;
+    width: 300px;
+    margin-left: 10px;
+}
+
+.colorPreview {
+    width: 80px;
+    height: 200px;
+    border: 1px solid black;
+    float: left;
+    border-radius: 2px;
+}
+
+.colorValues {
+    width: 200px;
+    height: 200px;
+    margin-left: 10px;
+    float: left;
+}
+
+.colorChanger {
+    width: 270px;
+    height: 20px;
+    margin-top: 25px;
+    padding: 0;
+    clear: both;
+    background: linear-gradient(to right, hsl(0, 100%, 50%), hsl(300, 100%, 50%), hsl(240, 100%, 50%), hsl(180, 100%, 50%), hsl(120, 100%, 50%), hsl(60, 100%, 50%), hsl(0, 100%, 50%));
+    border-radius: 20px;
+}
+
+.colorValues div {
+    text-align: right;
+    width: 200px;
+    height: 56px;
+}
+
+.colorValues div input {
+    display: inline-block;
+    text-align: right;
+    width: 121px;
+    height: 30px;
+    padding-right: 3px;
+    padding-left: 3px;
+    border: 1px solid black;
+    border-radius: 0 3px 3px 0;
+}
+
+.colorValues div label {
+    display: inline-block;
+    text-align: left;
+    width: 66px;
+    height: 26px;
+    padding-top: 6px;
+    padding-left: 3px;
+    border: 1px solid black;
+    background: rgb(101, 80, 93);
+    color: #9bf2e8;
+    border-radius: 5px 0 0 0;
+}
