@@ -1,12 +1,31 @@
+#colorPicker {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#colorPicker2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.container {
+    display: inline-block;
+}
+
 .colorPalette {
     background: white;
     float: left;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.pickerContainer {
+    overflow: hidden;
+    min-width: 235px;
 }
 
 .sideContainer {
     float: left;
-    width: 300px;
-    margin-left: 10px;
 }
 
 .colorPreview {
@@ -15,35 +34,49 @@
     border: 1px solid black;
     float: left;
     border-radius: 2px;
+    margin-right: 10px;
+}
+
+.colorPreviewSmall {
+    width: 40px;
+    height: 153px;
 }
 
 .colorValues {
-    width: 200px;
-    height: 200px;
-    margin-left: 10px;
     float: left;
 }
 
 .colorChanger {
-    width: 270px;
+    width: 299px;
     height: 20px;
-    margin-top: 25px;
+    margin: 25px 0 0;
     padding: 0;
     clear: both;
     background: linear-gradient(to right, hsl(0, 100%, 50%), hsl(300, 100%, 50%), hsl(240, 100%, 50%), hsl(180, 100%, 50%), hsl(120, 100%, 50%), hsl(60, 100%, 50%), hsl(0, 100%, 50%));
     border-radius: 20px;
+    display: block;
 }
 
-.colorValues div {
+.colorChangerSmall {
+    width: 207px;
+    height: 17px;
+    margin: 5px 0 0;
+}
+
+.colorValues>div {
     text-align: right;
-    width: 200px;
+    width: 207px;
     height: 56px;
 }
 
-.colorValues div input {
+.colorValuesSmall>div {
+    height: 40px;
+}
+
+.colorValues>div>input {
     display: inline-block;
     text-align: right;
-    width: 121px;
+    width: 128px;
     height: 30px;
     padding-right: 3px;
     padding-left: 3px;
@@ -51,7 +84,7 @@
     border-radius: 0 3px 3px 0;
 }
 
-.colorValues div label {
+.colorValues>div>label {
     display: inline-block;
     text-align: left;
     width: 66px;
