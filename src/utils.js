@@ -9,24 +9,24 @@ export function padLeft(word, expectedChars, fill) {
 export function drawGradient(setGradient, contextColorPalette, size) {
     console.log(size);
     if (setGradient.direction === 'horizontal') {
-        if (size == "small")
-            var gradient = contextColorPalette.createLinearGradient(0, 0, 155, 0);
-        if (size == 'normal')
-            var gradient = contextColorPalette.createLinearGradient(0, 0, 255, 0);
+        // if (size == "small")
+        var gradient = contextColorPalette.createLinearGradient(0, 0, size, 0);
+        // if (size == 'normal')
+        //     var gradient = contextColorPalette.createLinearGradient(0, 0, 255, 0);
     }
     if (setGradient.direction === 'vertical') {
-        if (size == "small")
-            var gradient = contextColorPalette.createLinearGradient(0, 0, 0, 155);
-        if (size == 'normal')
-            var gradient = contextColorPalette.createLinearGradient(0, 0, 0, 255);
+        // if (size == "small")
+        //     var gradient = contextColorPalette.createLinearGradient(0, 0, 0, 155);
+        // if (size == 'normal')
+        var gradient = contextColorPalette.createLinearGradient(0, 0, 0, size);
     }
     gradient.addColorStop(setGradient.from.distance, setGradient.from.color);
     gradient.addColorStop(setGradient.to.distance, setGradient.to.color);
     contextColorPalette.fillStyle = gradient;
-    if (size == "small")
-        contextColorPalette.fillRect(0, 0, 155, 155);
-    if (size == 'normal')
-        contextColorPalette.fillRect(0, 0, 255, 255);
+    // if (size == "small")
+    //     contextColorPalette.fillRect(0, 0, 155, 155);
+    // if (size == 'normal')
+    contextColorPalette.fillRect(0, 0, size, size);
 }
 
 

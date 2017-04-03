@@ -1,5 +1,5 @@
 import { padLeft } from './utils';
-export class Color {
+export default class Color {
     /**
      * Takes Color in RGB Format
      * 

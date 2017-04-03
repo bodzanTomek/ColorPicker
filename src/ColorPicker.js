@@ -1,4 +1,4 @@
-import { Color } from './Color';
+import Color from './Color';
 import { colorChanger, drawGradient, drawColorSample } from './utils';
 
 
@@ -6,11 +6,9 @@ import { colorChanger, drawGradient, drawColorSample } from './utils';
 window.addEventListener('load', () => {
     new ColorPickerSmall({
         id: "colorPicker",
-        size: 'small'
     })
     new ColorPickerNormal({
         id: "colorPicker2",
-        size: 'normal'
     })
 });
 
@@ -18,30 +16,30 @@ window.addEventListener('load', () => {
 class ColorPicker {
     constructor(options) {
         const rootId = options.id;
-        this.size = options.size;
+        // this.size = options.size;
         this.createDOM(rootId);
         this.setColorPaletteColor({ red: 255, green: 0, blue: 0 });
         this.drawColorPalette(this.paletteColor.toRgb());
-        if (this.size == "small")
-            this.setColorSample(80, 80);
-        if (this.size == "normal")
-            this.setColorSample(130, 130);
-        drawColorSample({
-            color: this.sampleColor.toRgb(),
-            context: this.contextColorPalette,
-            positionX: this.colorSamplePositionX,
-            positionY: this.colorSamplePositionY
-        });
-        this.setColorAsideElements(this.sampleColor);
+        // // if (this.size == "small")
+        // //     this.setColorSample(80, 80);
+        // // if (this.size == "normal")
+        // //     this.setColorSample(130, 130);
+        // drawColorSample({
+        //     color: this.sampleColor.toRgb(),
+        //     context: this.contextColorPalette,
+        //     positionX: this.colorSamplePositionX,
+        //     positionY: this.colorSamplePositionY
+        // });
+        //this.setColorAsideElements(this.sampleColor);
         this.addEventListeners();
     }
     setColorPaletteColor(color) {
-        this.paletteColor = new Color(color);
-    }
-    drawColorPalette(color) {
-        drawGradient({ direction: 'horizontal', from: { distance: 0.02, color: "white" }, to: { distance: 0.98, color: color } }, this.contextColorPalette, this.size);
-        drawGradient({ direction: 'vertical', from: { distance: 0.02, color: 'rgba(255, 255, 255, 0)' }, to: { distance: 0.98, color: "black" } }, this.contextColorPalette, this.size);
-    }
+            this.paletteColor = new Color(color);
+        }
+        // drawColorPalette(color) {
+        //     drawGradient({ direction: 'horizontal', from: { distance: 0.02, color: "white" }, to: { distance: 0.98, color: color } }, this.contextColorPalette, this.size);
+        //     drawGradient({ direction: 'vertical', from: { distance: 0.02, color: 'rgba(255, 255, 255, 0)' }, to: { distance: 0.98, color: "black" } }, this.contextColorPalette, this.size);
+        // }
     setColorSample(x, y) {
         this.colorSamplePositionX = x;
         this.colorSamplePositionY = y;
@@ -129,6 +127,14 @@ class ColorPicker {
 class ColorPickerSmall extends ColorPicker {
     constructor(options) {
         super(options);
+        this.setColorSample(80, 80);
+        drawColorSample({
+            color: this.sampleColor.toRgb(),
+            context: this.contextColorPalette,
+            positionX: this.colorSamplePositionX,
+            positionY: this.colorSamplePositionY
+        });
+        this.setColorAsideElements(this.sampleColor);
     }
     createDOM(rootId) {
         this.root = document.getElementById(rootId);
@@ -209,12 +215,25 @@ class ColorPickerSmall extends ColorPicker {
         divElement.appendChild(Input);
         return Input;
     }
+    drawColorPalette(color) {
+        this.sizeColorPalette = 155;
+        drawGradient({ direction: 'horizontal', from: { distance: 0.02, color: "white" }, to: { distance: 0.98, color: color } }, this.contextColorPalette, this.sizeColorPalette);
+        drawGradient({ direction: 'vertical', from: { distance: 0.02, color: 'rgba(255, 255, 255, 0)' }, to: { distance: 0.98, color: "black" } }, this.contextColorPalette, this.sizeColorPalette);
+    }
 }
 
 
 class ColorPickerNormal extends ColorPicker {
     constructor(options) {
         super(options);
+        this.setColorSample(130, 130);
+        drawColorSample({
+            color: this.sampleColor.toRgb(),
+            context: this.contextColorPalette,
+            positionX: this.colorSamplePositionX,
+            positionY: this.colorSamplePositionY
+        });
+        this.setColorAsideElements(this.sampleColor);
     }
     createDOM(rootId) {
         this.root = document.getElementById(rootId);
@@ -287,5 +306,10 @@ class ColorPickerNormal extends ColorPicker {
         Input.type = "text";
         divElement.appendChild(Input);
         return Input;
+    }
+    drawColorPalette(color) {
+        this.sizeColorPalette = 255;
+        drawGradient({ direction: 'horizontal', from: { distance: 0.02, color: "white" }, to: { distance: 0.98, color: color } }, this.contextColorPalette, this.sizeColorPalette);
+        drawGradient({ direction: 'vertical', from: { distance: 0.02, color: 'rgba(255, 255, 255, 0)' }, to: { distance: 0.98, color: "black" } }, this.contextColorPalette, this.sizeColorPalette);
     }
 }
