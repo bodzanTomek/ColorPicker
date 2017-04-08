@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-    entry: './src/ColorPicker.js',
+    entry: ['babel-polyfill', './src/main.js'],
 
     output: {
         path: path.join(__dirname, 'dist'),
@@ -10,7 +10,7 @@ module.exports = {
     module: {
         rules: [{
             loader: 'babel-loader',
-            test: /\.js$/, //RegExp
+            test: /\.js$/,
             exclude: /node_modules/,
             query: {
                 presets: ['es2015']
