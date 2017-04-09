@@ -60,8 +60,15 @@ export default class ColorPicker {
         this.numberInput.value = color.toNumber();
     }
     addEventListeners() {
-        this.colorChanger.addEventListener("change", () => this.runColorChanger(parseInt(this.colorChanger.value)));
-        //this.colorChanger.addEventListener("mousemove", () => this.runColorChanger(parseInt(this.colorChanger.value)));
+        this.aaa = () => this.runColorChanger(parseInt(this.colorChanger.value));
+        this.colorChanger.addEventListener("mousedown", () => {
+            this.activateMouseMove();
+            this.runColorChanger(parseInt(this.colorChanger.value));
+        });
+        this.colorChanger.addEventListener('mouseup', () => this.deactivateMouseMove());
+        this.colorChanger.addEventListener('mouseout', () => this.deactivateMouseMove());
+
+
         this.functionOnClickedCanvas = (e) => this.onClickedCanvasPixel(e);
         this.colorPalette.addEventListener('mousedown', (e) => {
             this.activateMouseMove();
@@ -71,6 +78,7 @@ export default class ColorPicker {
         this.colorPalette.addEventListener('mouseout', () => this.deactivateMouseMove());
     }
     runColorChanger(colorChangerPosition) {
+        console.log(colorChangerPosition);
         let returnedColorChanger = colorChanger(colorChangerPosition);
         this.setColorPaletteColor(returnedColorChanger);
         this.drawColorPalette(this.paletteColor.toRgb());
@@ -79,6 +87,7 @@ export default class ColorPicker {
         this.setColorAsideElements(this.sampleColor);
     }
     onClickedCanvasPixel(e) {
+        console.log(e)
         this.drawColorPalette(this.paletteColor.toRgb());
         this.setColorSample(e.offsetX, e.offsetY);
         drawColorSample({
@@ -90,9 +99,11 @@ export default class ColorPicker {
         this.setColorAsideElements(this.sampleColor);
     }
     activateMouseMove() {
+        this.colorChanger.addEventListener("mousemove", () => this.aaa());
         this.colorPalette.addEventListener('mousemove', this.functionOnClickedCanvas);
     }
     deactivateMouseMove() {
+        this.colorChanger.removeEventListener("mousemove", () => this.aaa());
         this.colorPalette.removeEventListener("mousemove", this.functionOnClickedCanvas);
     }
 }
