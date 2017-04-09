@@ -52,7 +52,7 @@
     margin: 25px 0 0;
     padding: 0;
     clear: both;
-    background: linear-gradient(to right, hsl(0, 100%, 50%), hsl(300, 100%, 50%), hsl(240, 100%, 50%), hsl(180, 100%, 50%), hsl(120, 100%, 50%), hsl(60, 100%, 50%), hsl(0, 100%, 50%));
+    background-image: linear-gradient(to right, hsl(0, 100%, 50%), hsl(300, 100%, 50%), hsl(240, 100%, 50%), hsl(180, 100%, 50%), hsl(120, 100%, 50%), hsl(60, 100%, 50%), hsl(0, 100%, 50%));
     border-radius: 20px;
     display: block;
 }

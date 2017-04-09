@@ -1,9 +1,10 @@
 import ColorPicker from './ColorPicker';
+import { colorChanger, drawGradient, drawColorSample } from './utils';
 
 export default class ColorPickerSmall extends ColorPicker {
     constructor(options) {
-        //super(options);
-        console.log("aaa");
+        super(options);
+        console.log("small");
         this.setColorSample(80, 80);
         this.drawColorSample();
         this.setColorAsideElements(this.sampleColor);
@@ -62,7 +63,7 @@ export default class ColorPickerSmall extends ColorPicker {
         this.colorChanger.classList.add("colorChanger");
         this.colorChanger.type = "range";
         this.colorChanger.min = "1";
-        this.colorChanger.max = "1530";
+        this.colorChanger.max = "360";
         this.colorChanger.step = "1";
         this.colorChanger.value = 1;
         this.sideContainer.appendChild(this.colorChanger);

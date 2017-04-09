@@ -1,4 +1,5 @@
 import ColorPicker from './ColorPicker';
+import { colorChanger, drawGradient, drawColorSample } from './utils';
 
 export default class ColorPickerNormal extends ColorPicker {
     constructor(options) {
@@ -59,7 +60,7 @@ export default class ColorPickerNormal extends ColorPicker {
         this.colorChanger.className = "colorChanger";
         this.colorChanger.type = "range";
         this.colorChanger.min = "1";
-        this.colorChanger.max = "1530";
+        this.colorChanger.max = "360";
         this.colorChanger.step = "1";
         this.colorChanger.value = 1;
         this.sideContainer.appendChild(this.colorChanger);

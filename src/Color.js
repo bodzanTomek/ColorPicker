@@ -1,4 +1,5 @@
 import { padLeft } from './utils';
+
 export default class Color {
     /**
      * Takes Color in RGB Format
@@ -6,19 +7,6 @@ export default class Color {
      * @param {Object} color RGB format
      */
     constructor(color) {
-        // if ((arguments.length == 3) && (typeof(arguments[1]) == "number")) { //czy  rgb
-        //     this.rgb = this.parseRgb(arguments);
-        // }
-        // if ((arguments.length == 1) && (typeof(arguments[0]) == "number")) { //czy  number
-        //     this.rgb = this.parseNumber(arguments);
-        // }
-        // if ((arguments.length == 3) && (typeof(arguments[1]) == "string")) { //czy  hsl
-        //     this.rgb = this.parseHsl(arguments);
-        // }
-        // if ((arguments.length == 1) && (typeof(arguments[0]) == "string")) { //czy  hex
-        //     this.rgb = this.parseHex(arguments);
-        // }
-
         this.rgb = {
             red: color.red,
             green: color.green,
@@ -29,6 +17,10 @@ export default class Color {
     // static fromRgb(color) {
     //     return new Color(this.parseRgb(color));
     // }
+
+    static fromHsl(color) {
+        return new Color(this.parseHsl(color));
+    }
 
     // static parseRgb(color) {
     //     return {
@@ -53,51 +45,51 @@ export default class Color {
     //         blue: parseInt(args[0].substr(5, 2), 16),
     //     }
     // }
-    // parseHsl(args) {
-    //     let r, g, b;
-    //     const h = parseInt(args[0]);
-    //     const s = parseInt(args[1]) / 100;
-    //     const l = parseInt(args[2]) / 100;
-    //     const c = ((1 - Math.abs(2 * l - 1)) * s);
-    //     const x = c * (1 - Math.abs((h / 60) % 2 - 1));
-    //     const m = l - c / 2;
+    static parseHsl(color) {
+        let r, g, b;
+        const h = color.h;
+        const s = color.s / 100;
+        const l = color.l / 100;
+        const c = ((1 - Math.abs(2 * l - 1)) * s);
+        const x = c * (1 - Math.abs((h / 60) % 2 - 1));
+        const m = l - c / 2;
 
-    //     if (0 <= h && h <= 60) {
-    //         r = c;
-    //         g = x;
-    //         b = 0;
-    //     }
-    //     if (60 <= h && h <= 120) {
-    //         r = x;
-    //         g = c;
-    //         b = 0;
-    //     }
-    //     if (120 <= h && h <= 180) {
-    //         r = 0;
-    //         g = c;
-    //         b = x;
-    //     }
-    //     if (180 <= h && h <= 240) {
-    //         r = 0;
-    //         g = x;
-    //         b = c;
-    //     }
-    //     if (240 <= h && h <= 300) {
-    //         r = x;
-    //         g = 0;
-    //         b = c;
-    //     }
-    //     if (300 <= h && h <= 360) {
-    //         r = c;
-    //         g = 0;
-    //         b = x;
-    //     }
-    //     return {
-    //         red: Math.round((r + m) * 255),
-    //         green: Math.round((g + m) * 255),
-    //         blue: Math.round((b + m) * 255),
-    //     }
-    // }
+        if (0 <= h && h <= 60) {
+            r = c;
+            g = x;
+            b = 0;
+        }
+        if (60 <= h && h <= 120) {
+            r = x;
+            g = c;
+            b = 0;
+        }
+        if (120 <= h && h <= 180) {
+            r = 0;
+            g = c;
+            b = x;
+        }
+        if (180 <= h && h <= 240) {
+            r = 0;
+            g = x;
+            b = c;
+        }
+        if (240 <= h && h <= 300) {
+            r = x;
+            g = 0;
+            b = c;
+        }
+        if (300 <= h && h <= 360) {
+            r = c;
+            g = 0;
+            b = x;
+        }
+        return {
+            red: Math.round((r + m) * 255),
+            green: Math.round((g + m) * 255),
+            blue: Math.round((b + m) * 255),
+        }
+    }
     toNumber() {
         return this.rgb.red * 256 * 256 + this.rgb.green * 256 + this.rgb.blue;
     }
@@ -137,6 +129,9 @@ export default class Color {
         }
         l = Math.round(100 * l) + "%";
         s = Math.round(100 * s) + "%";
+        if (isNaN(h)) {
+            h = 0;
+        }
         h = Math.round((h < 0) ? h + 360 : h) + "°";
         hsl = h + "," + s + "," + l;
         return "hsl(" + hsl + ")";
