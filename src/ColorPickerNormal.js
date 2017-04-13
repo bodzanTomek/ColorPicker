@@ -1,35 +1,62 @@
 import ColorPicker from './ColorPicker';
 import { colorChanger, drawGradient, drawColorSample } from './utils';
+import {
+    createRoot,
+    createContainer,
+    createColorPalette,
+    createColorPreview,
+    createSideContainer,
+    createColorValues,
+    createAndAddColorValueInput,
+    createColorChanger
+} from './createDOMhelpers';
 
 export default class ColorPickerNormal extends ColorPicker {
     constructor(options) {
-        super(options);
-        this.setColorSample(130, 130);
-        this.drawColorSample();
-        this.setColorAsideElements(this.sampleColor);
+        super(options, { colorPaletteSize: 255, colorSamplePositionX: 130, colorSamplePositionY: 130 });
     }
     createDOM(rootId) {
-        this.createRoot(rootId);
-        this.createContainer();
-        this.addContainerToRoot();
+        const root = createRoot(rootId);
+        const container = createContainer();
+        root.appendChild(container);
 
-        this.createColorPalette(255);
-        this.addColorPaletteToContainer();
+        this.colorPalette = createColorPalette(255);
+        this.contextColorPalette = this.colorPalette.getContext('2d');
+        container.appendChild(this.colorPalette);
 
-        this.createSideContainer();
-        this.addSideContainerToContainer();
-        this.createColorPreview("colorPreview");
-        this.addColorPreviewToSideContainer();
-        this.createColorValues("colorValues");
-        this.addColorValuesToSideContainer();
-        this.createColorChanger("colorChanger");
-        this.addColorChangerToSideContainer();
-        this.createAndAddColorValuesInputs();
-    }
+        const sideContainer = createSideContainer();
+        container.appendChild(sideContainer);
+        this.colorPreview = createColorPreview("colorPreview");
+        sideContainer.appendChild(this.colorPreview);
 
-    drawColorPalette(color) {
-        this.sizeColorPalette = 255;
-        drawGradient({ direction: 'horizontal', from: { distance: 0.02, color: "white" }, to: { distance: 0.98, color: color } }, this.contextColorPalette, this.sizeColorPalette);
-        drawGradient({ direction: 'vertical', from: { distance: 0.02, color: 'rgba(255, 255, 255, 0)' }, to: { distance: 0.98, color: "black" } }, this.contextColorPalette, this.sizeColorPalette);
+        let colorValues = createColorValues("colorValues");
+        sideContainer.appendChild(colorValues);
+
+        this.rgbInput = createAndAddColorValueInput(colorValues, {
+            divClassName: "rgb",
+            labelFor: "rgbInput",
+            labelTextContent: "Rgb: ",
+            inputClassName: "rgbInput"
+        });
+        this.hslInput = createAndAddColorValueInput(colorValues, {
+            divClassName: "hsl",
+            labelFor: "hslInput",
+            labelTextContent: "Hsl: ",
+            inputClassName: "hslInput"
+        });
+        this.hexInput = createAndAddColorValueInput(colorValues, {
+            divClassName: "hex",
+            labelFor: "hexInput",
+            labelTextContent: "Hex: ",
+            inputClassName: "hexInput"
+        });
+        this.numberInput = createAndAddColorValueInput(colorValues, {
+            divClassName: "number",
+            labelFor: "numberInput",
+            labelTextContent: "Number: ",
+            inputClassName: "numberInput"
+        });
+        this.colorChanger = createColorChanger("colorChanger");
+        sideContainer.appendChild(this.colorChanger);
     }
 }
